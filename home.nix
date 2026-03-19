@@ -152,6 +152,7 @@ in {
     lazygit
     nixfmt-classic
     nodejs_24
+    opencommit
     purs # PureScript コンパイラ（overlay 提供）
     purescript-language-server # LSP サーバー（overlay 提供）
     pijul

@@ -1,3 +1,4 @@
 # .gitignore
 secrets/
 .gitconfig-local
+.env
