@@ -161,6 +161,7 @@ in {
     qwen-code
     ripgrep
     starship
+    translate-shell
     trash-cli
     tree-sitter
     vhs
