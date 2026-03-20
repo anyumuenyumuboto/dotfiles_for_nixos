@@ -2,7 +2,7 @@
 
 let
   # 秘密情報を格納するファイルのパス
-  localGitConfig = "${config.home.homeDirectory}/dotfiles/.gitconfig-local";
+  localGitConfig = "${config.home.homeDirectory}/dotfiles_for_nixos/.gitconfig-local";
 in {
 
   home.username = "nixos";
@@ -147,8 +147,10 @@ in {
     gcc
     gh
     git
+    gitleaks
     gnumake
     go-task
+    husky
     lazygit
     nixfmt-classic
     nodejs_24

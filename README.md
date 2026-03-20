@@ -24,7 +24,7 @@ Flakesベースの設定です
 各ファイルを編集したら
 
 ```console
-sudo nixos-rebuild switch --flake ~/dotfiles
+sudo nixos-rebuild switch --flake ~/dotfiles_for_nixos
 ```
 
 で更新
@@ -32,7 +32,7 @@ sudo nixos-rebuild switch --flake ~/dotfiles
 以下のコマンドを使えば、flake.lockも更新できる
 
 ```console
-sudo nixos-rebuild switch --upgrade
+sudo nixos-rebuild switch --flake ~/dotfiles_for_nixos --upgrade
 ```
 
 ### システム自体のアップデート
