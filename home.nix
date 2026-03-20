@@ -2,7 +2,8 @@
 
 let
   # 秘密情報を格納するファイルのパス
-  localGitConfig = "${config.home.homeDirectory}/dotfiles_for_nixos/.gitconfig-local";
+  localGitConfig =
+    "${config.home.homeDirectory}/dotfiles_for_nixos/.gitconfig-local";
 in {
 
   home.username = "nixos";
@@ -40,6 +41,22 @@ in {
   };
 
   programs.nixvim = {
+
+    autoCmd = [{
+      event = [ "FileType" ];
+      pattern = [ "purescript" ];
+      callback = {
+        __raw = ''
+          function()
+            vim.opt.expandtab = true
+            vim.opt.shiftwidth = 2
+            vim.opt.softtabstop = 2
+            vim.opt.tabstop = 2
+          end
+        '';
+      };
+    }];
+
     enable = true;
 
     opts = { shell = "${pkgs.zsh}/bin/zsh"; };
