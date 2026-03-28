@@ -180,6 +180,7 @@ in {
     starship
     translate-shell
     trash-cli
+    tree
     tree-sitter
     vhs
     yazi
