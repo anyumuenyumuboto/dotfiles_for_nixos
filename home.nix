@@ -162,6 +162,7 @@ in {
     bat
     bottom
     gcc
+    gemini-cli
     gh
     git
     gitleaks
