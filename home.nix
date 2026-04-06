@@ -42,20 +42,33 @@ in {
 
   programs.nixvim = {
 
-    autoCmd = [{
-      event = [ "FileType" ];
-      pattern = [ "purescript" ];
-      callback = {
-        __raw = ''
-          function()
-            vim.opt.expandtab = true
-            vim.opt.shiftwidth = 2
-            vim.opt.softtabstop = 2
-            vim.opt.tabstop = 2
-          end
-        '';
-      };
-    }];
+    autoCmd = [
+      {
+        event = [ "FileType" ];
+        pattern = [ "purescript" ];
+        callback = {
+          __raw = ''
+            function()
+              vim.opt.expandtab = true
+              vim.opt.shiftwidth = 2
+              vim.opt.softtabstop = 2
+              vim.opt.tabstop = 2
+            end
+          '';
+        };
+      }
+      {
+        event = [ "TextYankPost" ];
+        pattern = [ "*" ];
+        callback = {
+          __raw = ''
+            function()
+              vim.highlight.on_yank()
+            end
+          '';
+        };
+      }
+    ];
 
     enable = true;
 
