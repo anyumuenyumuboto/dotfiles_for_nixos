@@ -19,48 +19,59 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixos-wsl, home-manager, ... }: {
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      nixos-wsl,
+      home-manager,
+      ...
+    }:
+    {
 
-    # 🔹 overlay を outputs にエクスポート（任意だが推奨）
-    overlays = { purescript = inputs.purescript-overlay.overlays.default; };
+      # 🔹 overlay を outputs にエクスポート（任意だが推奨）
+      overlays = {
+        purescript = inputs.purescript-overlay.overlays.default;
+      };
 
-    # The host with the hostname `nixos` will use this configuration
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      # The host with the hostname `nixos` will use this configuration
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
 
-      # 🔹 nixpkgs に overlay を適用
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./configuration.nix
+        # 🔹 nixpkgs に overlay を適用
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
 
-        #wsl-setting
-        nixos-wsl.nixosModules.default
-        {
-          system.stateVersion = "25.11";
-          wsl.enable = true;
-        }
+          #wsl-setting
+          nixos-wsl.nixosModules.default
+          {
+            system.stateVersion = "25.11";
+            wsl.enable = true;
+          }
 
-        # 🔹 overlay を適用するためのモジュール
-        {
-          nixpkgs.overlays = [ inputs.purescript-overlay.overlays.default ];
-        }
+          # 🔹 overlay を適用するためのモジュール
+          {
+            nixpkgs.overlays = [ inputs.purescript-overlay.overlays.default ];
+          }
 
-        # home-manager settings
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.users.nixos = { pkgs, ... }: {
-            imports = [
-              ./home.nix # 既存の設定ファイル
-              # nixvim の Home Manager モジュールを追加
-              inputs.nixvim.homeModules.nixvim
-            ];
-          };
-        }
-      ];
+          # home-manager settings
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.nixos =
+              { pkgs, ... }:
+              {
+                imports = [
+                  ./home.nix # 既存の設定ファイル
+                  # nixvim の Home Manager モジュールを追加
+                  inputs.nixvim.homeModules.nixvim
+                ];
+              };
+          }
+        ];
+      };
     };
-  };
 }
-

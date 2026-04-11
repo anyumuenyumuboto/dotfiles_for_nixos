@@ -35,6 +35,14 @@ sudo nixos-rebuild switch --flake ~/dotfiles_for_nixos
 sudo nixos-rebuild switch --flake ~/dotfiles_for_nixos --upgrade
 ```
 
+### format
+
+ディレクトリ全体を再帰的にフォーマット
+
+```console
+treefmt
+```
+
 ### システム自体のアップデート
 
 ```

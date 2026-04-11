@@ -2,9 +2,9 @@
 
 let
   # 秘密情報を格納するファイルのパス
-  localGitConfig =
-    "${config.home.homeDirectory}/dotfiles_for_nixos/.gitconfig-local";
-in {
+  localGitConfig = "${config.home.homeDirectory}/dotfiles_for_nixos/.gitconfig-local";
+in
+{
 
   home.username = "nixos";
   home.homeDirectory = "/home/nixos";
@@ -20,10 +20,12 @@ in {
   programs.git = {
     enable = true;
 
-    settings = { init.defaultBranch = "main"; };
+    settings = {
+      init.defaultBranch = "main";
+    };
 
     # ローカルの設定ファイルを含める
-    includes = [{ path = localGitConfig; }];
+    includes = [ { path = localGitConfig; } ];
   };
 
   programs.zsh = {
@@ -32,7 +34,9 @@ in {
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    shellAliases = { nixos_update = "sudo nixos-rebuild switch"; };
+    shellAliases = {
+      nixos_update = "sudo nixos-rebuild switch";
+    };
   };
 
   programs.gh = {
@@ -80,7 +84,9 @@ in {
 
     enable = true;
 
-    opts = { shell = "${pkgs.zsh}/bin/zsh"; };
+    opts = {
+      shell = "${pkgs.zsh}/bin/zsh";
+    };
 
     plugins = {
       # [lsp - nixvim docs](https://nix-community.github.io/nixvim/plugins/lsp/index.html)
@@ -97,7 +103,9 @@ in {
       };
 
       # barbar.nvim
-      barbar = { enable = true; };
+      barbar = {
+        enable = true;
+      };
 
       # img-clip.nvim
       img-clip.enable = true;
@@ -193,6 +201,7 @@ in {
     husky
     lazygit
     nixfmt
+    nixfmt-tree
     nodejs_24
     opencommit
     purs # PureScript コンパイラ（overlay 提供）
