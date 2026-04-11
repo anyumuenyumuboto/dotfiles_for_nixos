@@ -114,7 +114,16 @@ in
       };
 
       # gitsigns.nvim
-      gitsigns.enable = true;
+      gitsigns = {
+        enable = true;
+        lazyLoad.settings.event = [ "BufReadPost" ];
+        settings.on_attach = ''
+          function(bufnr)
+            vim.keymap.set('n', ']c', '<cmd>lua require"gitsigns".next_hunk()<CR>', { buffer = bufnr })
+            vim.keymap.set('n', '[c', '<cmd>lua require"gitsigns".prev_hunk()<CR>', { buffer = bufnr })
+          end
+        '';
+      };
 
       # lazygit.nvim
       lazygit = {
