@@ -9,6 +9,14 @@ in {
   home.username = "nixos";
   home.homeDirectory = "/home/nixos";
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    # shellHook を自動的に設定するか（基本は true で OK）
+    enableBashIntegration = true; 
+    enableZshIntegration = true;
+  };
+
   programs.git = {
     enable = true;
 
@@ -174,6 +182,7 @@ in {
   home.packages = with pkgs; [
     bat
     bottom
+    direnv
     gcc
     gemini-cli
     gh
