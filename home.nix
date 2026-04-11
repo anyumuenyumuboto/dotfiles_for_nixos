@@ -13,7 +13,7 @@ in {
     enable = true;
     nix-direnv.enable = true;
     # shellHook を自動的に設定するか（基本は true で OK）
-    enableBashIntegration = true; 
+    enableBashIntegration = true;
     enableZshIntegration = true;
   };
 
