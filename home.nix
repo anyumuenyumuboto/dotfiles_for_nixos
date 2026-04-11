@@ -108,22 +108,37 @@ in
       };
 
       # img-clip.nvim
-      img-clip.enable = true;
+      img-clip = {
+        enable = true;
+        lazyLoad.settings.cmd = "PasteImage";
+      };
 
       # gitsigns.nvim
       gitsigns.enable = true;
 
       # lazygit.nvim
-      lazygit.enable = true;
+      lazygit = {
+        enable = true;
+        lazyLoad.settings.cmd = "LazyGit";
+      };
 
       # lualine.nvim
       lualine.enable = true;
+
+      # lz.n
+      lz-n.enable = true;
 
       # neo-tree.nvim
       neo-tree.enable = true;
 
       # vim-sandwich
       sandwich.enable = true;
+
+      # telescope.nim
+      telescope = {
+        enable = true;
+        lazyLoad.settings.cmd = "Telescope";
+      };
 
       # nvim-treesitter
       treesitter = {
