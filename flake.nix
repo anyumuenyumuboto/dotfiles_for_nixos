@@ -2,16 +2,15 @@
   description = "flake ";
 
   inputs = {
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/release-25.11";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
       # [nix-community/nixvim: Configure Neovim with Nix! [maintainers=@GaetanLepage, @traxys, @mattsturgeon, @khaneliman]](https://github.com/nix-community/nixvim)
-      # url = "github:nix-community/nixvim";
-      url = "github:nix-community/nixvim/nixos-25.11";
+      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     purescript-overlay = {

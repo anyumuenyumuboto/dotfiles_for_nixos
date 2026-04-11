@@ -192,7 +192,7 @@ in {
     go-task
     husky
     lazygit
-    nixfmt-classic
+    nixfmt
     nodejs_24
     opencommit
     purs # PureScript コンパイラ（overlay 提供）
