@@ -58,18 +58,20 @@
           # home-manager settings
           home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.nixos =
-              { pkgs, ... }:
-              {
-                imports = [
-                  ./home.nix # 既存の設定ファイル
-                  # nixvim の Home Manager モジュールを追加
-                  inputs.nixvim.homeModules.nixvim
-                ];
-              };
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.nixos =
+                { pkgs, ... }:
+                {
+                  imports = [
+                    ./home.nix # 既存の設定ファイル
+                    # nixvim の Home Manager モジュールを追加
+                    inputs.nixvim.homeModules.nixvim
+                  ];
+                };
+            };
           }
         ];
       };
