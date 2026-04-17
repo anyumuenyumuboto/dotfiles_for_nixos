@@ -1,10 +1,19 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  purescriptEnabled ? false,
+  ...
+}:
 
 let
   # 秘密情報を格納するファイルのパス
   localGitConfig = "${config.home.homeDirectory}/dotfiles_for_nixos/.gitconfig-local";
 in
 {
+  imports = [
+    inputs.nixvim.homeModules.nixvim
+  ] ++ (if purescriptEnabled then [ ./purescript.nix ] else [ ]);
 
   home.username = "nixos";
   home.homeDirectory = "/home/nixos";
@@ -35,7 +44,8 @@ in
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      nixos_update = "sudo nixos-rebuild switch";
+      nixos_update = "sudo nixos-rebuild switch --flake .#nixos";
+      purescript_update = "sudo nixos-rebuild switch --flake .#purescript";
     };
   };
 
@@ -95,10 +105,6 @@ in
         servers = {
           lua_ls.enable = true; # Lua Language Server を有効化
           ts_ls.enable = true; # TypeScript Language Server を有効化
-          purescriptls = {
-            enable = true; # Purescript Language Server を有効化
-            package = null;
-          };
         };
       };
 
@@ -228,8 +234,6 @@ in
     nixfmt-tree
     nodejs_24
     opencommit
-    purs # PureScript コンパイラ（overlay 提供）
-    purescript-language-server # LSP サーバー（overlay 提供）
     pijul
     qwen-code
     ripgrep
