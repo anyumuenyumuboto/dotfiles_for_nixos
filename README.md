@@ -35,6 +35,19 @@ sudo nixos-rebuild switch --flake ~/dotfiles_for_nixos
 sudo nixos-rebuild switch --flake ~/dotfiles_for_nixos --upgrade
 ```
 
+### 設定の共有と分岐
+
+purescript関連は、汎用的に使う環境にはいらないので、
+`purescript.nix`ファイルに分けている
+
+purescript関連を含む設定を適用するには
+
+```
+sudo nixos-rebuild switch --flake ~/dotfiles_for_nixos#purescript
+```
+
+のようにする
+
 ### format
 
 ディレクトリ全体を再帰的にフォーマット
