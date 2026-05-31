@@ -218,12 +218,16 @@ in
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
+    OCO_AI_PROVIDER = "ollama";
+    OCO_MODEL = "qwen2.5:3b";
+    OCO_API_URL = "http://localhost:11434";
   };
 
   home.packages = with pkgs; [
     bat
     bottom
     direnv
+    fzf
     gcc
     gemini-cli
     gh
