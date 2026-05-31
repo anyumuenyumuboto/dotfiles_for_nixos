@@ -13,7 +13,8 @@ in
 {
   imports = [
     inputs.nixvim.homeModules.nixvim
-  ] ++ (if purescriptEnabled then [ ./purescript.nix ] else [ ]);
+  ]
+  ++ (if purescriptEnabled then [ ./purescript.nix ] else [ ]);
 
   home.username = "nixos";
   home.homeDirectory = "/home/nixos";
@@ -63,6 +64,8 @@ in
   };
 
   programs.nixvim = {
+    # vim-sandwich が unfreeライセンスと判定されたため Unfree ライセンスのプラグインを許可
+    nixpkgs.config.allowUnfree = true;
 
     autoCmd = [
       {

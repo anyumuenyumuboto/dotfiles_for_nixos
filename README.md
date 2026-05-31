@@ -24,7 +24,7 @@ Flakesベースの設定です
 各ファイルを編集したら
 
 ```console
-sudo nixos-rebuild switch --flake ~/dotfiles_for_nixos
+sudo nixos-rebuild switch --flake .
 ```
 
 で更新
@@ -32,7 +32,7 @@ sudo nixos-rebuild switch --flake ~/dotfiles_for_nixos
 以下のコマンドを使えば、flake.lockも更新できる
 
 ```console
-sudo nixos-rebuild switch --flake ~/dotfiles_for_nixos --upgrade
+sudo nix flake update
 ```
 
 ### 設定の共有と分岐
@@ -43,7 +43,7 @@ purescript関連は、汎用的に使う環境にはいらないので、
 purescript関連を含む設定を適用するには
 
 ```
-sudo nixos-rebuild switch --flake ~/dotfiles_for_nixos#purescript
+sudo nixos-rebuild switch --flake .#purescript
 ```
 
 のようにする
