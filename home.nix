@@ -229,7 +229,6 @@ in
     direnv
     fzf
     gcc
-    gemini-cli
     gh
     git
     gitleaks
