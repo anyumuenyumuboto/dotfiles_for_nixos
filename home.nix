@@ -233,6 +233,7 @@ in
     nixfmt
     nixfmt-tree
     nodejs_24
+    ollama
     opencommit
     pijul
     qwen-code
