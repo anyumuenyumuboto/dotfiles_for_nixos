@@ -227,6 +227,7 @@ in
     bat
     bottom
     direnv
+    docker
     fzf
     gcc
     gh
@@ -252,6 +253,7 @@ in
     vhs
     yazi
     stylua
+    zellij
   ];
 
   home.stateVersion = "25.11";
