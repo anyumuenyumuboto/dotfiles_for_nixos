@@ -27,6 +27,8 @@ in
     enableZshIntegration = true;
   };
 
+  programs.firefox.enable = true;
+
   programs.git = {
     enable = true;
 
@@ -224,28 +226,25 @@ in
   };
 
   home.packages = with pkgs; [
+    aider-chat
     bat
     bottom
-    direnv
     docker
     fzf
     gcc
-    gh
-    git
     gitleaks
     gnumake
     go-task
     husky
     lazygit
+    llama-cpp
     nixfmt
     nixfmt-tree
     nodejs_24
-    ollama
     opencommit
     pijul
-    qwen-code
+    playwright-test
     ripgrep
-    starship
     translate-shell
     trash-cli
     tree
