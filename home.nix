@@ -110,18 +110,13 @@ in
         servers = {
           lua_ls.enable = true; # Lua Language Server を有効化
           ts_ls.enable = true; # TypeScript Language Server を有効化
+          idris2_lsp.enable = true;
         };
       };
 
       # barbar.nvim
       barbar = {
         enable = true;
-      };
-
-      # img-clip.nvim
-      img-clip = {
-        enable = true;
-        lazyLoad.settings.cmd = "PasteImage";
       };
 
       # gitsigns.nvim
@@ -134,6 +129,49 @@ in
             vim.keymap.set('n', '[c', '<cmd>lua require"gitsigns".prev_hunk()<CR>', { buffer = bufnr })
           end
         '';
+      };
+
+      # idris2-nvim
+      idris2 = {
+        enable = true;
+        settings = {
+          server = {
+            # ★ ここを { __raw = "..." } で囲む ★
+            on_attach = {
+              __raw = ''
+                function(client, bufnr)
+                  -- バッファローカルなキーマップを設定するヘルパー関数
+                  local map = function(mode, key, action, desc)
+                    vim.keymap.set(mode, key, action, { buffer = bufnr, desc = desc })
+                  end
+
+                  -- ==========================================
+                  -- コードアクション
+                  -- ==========================================
+                  map('n', '<leader>iac', function() require('idris2.code_action').add_clause() end, 'Idris: Add clause')
+                  map('n', '<leader>ics', function() require('idris2.code_action').case_split() end, 'Idris: Case split')
+                  map('n', '<leader>imc', function() require('idris2.code_action').make_case() end, 'Idris: Make case')
+                  map('n', '<leader>imw', function() require('idris2.code_action').make_with() end, 'Idris: Make with')
+                  map('n', '<leader>iml', function() require('idris2.code_action').make_lemma() end, 'Idris: Make lemma')
+                  map('n', '<leader>ies', function() require('idris2.code_action').expr_search() end, 'Idris: Expression search')
+
+                  -- ==========================================
+                  -- メタ変数（穴）のナビゲーション
+                  -- ==========================================
+                  map('n', '<leader>ign', function() require('idris2.metavars').goto_next() end, 'Idris: Next metavar')
+                  map('n', '<leader>igp', function() require('idris2.metavars').goto_prev() end, 'Idris: Previous metavar')
+                  map('n', '<leader>ira', function() require('idris2.metavars').request_all() end, 'Idris: List all metavars')
+                end
+              '';
+            };
+          };
+        };
+      };
+
+      # img-clip.nvim
+      img-clip = {
+        enable = true;
+        lazyLoad.settings.cmd = "PasteImage";
       };
 
       # lazygit.nvim
@@ -232,6 +270,7 @@ in
     docker
     fzf
     gcc
+    geckodriver
     gitleaks
     gnumake
     go-task
