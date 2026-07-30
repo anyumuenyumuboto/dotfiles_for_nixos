@@ -35,4 +35,7 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
+
+  # [nix-community/nix-ld: Run unpatched dynamic binaries on NixOS [maintainer=@Mic92]](https://github.com/nix-community/nix-ld)
+  programs.nix-ld.enable = true;
 }
