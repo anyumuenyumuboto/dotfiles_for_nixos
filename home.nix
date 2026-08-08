@@ -119,6 +119,11 @@ in
         enable = true;
       };
 
+      # flash.nvim
+      flash = {
+        enable = true;
+      };
+
       # gitsigns.nvim
       gitsigns = {
         enable = true;
@@ -242,6 +247,88 @@ in
         mode = "n";
         key = "<A-c>";
         action = "<Cmd>BufferClose<CR>";
+      }
+      # [folke/flash.nvim: Navigate your code with search labels, enhanced character motions and Treesitter integration](https://github.com/folke/flash.nvim)
+      {
+        mode = [
+          "n"
+          "x"
+          "o"
+        ];
+        key = "s";
+        action.__raw = ''
+
+          function()
+            require('flash').jump()
+          end
+        '';
+        options = {
+          desc = "Flash";
+          silent = true;
+        };
+      }
+      {
+        mode = [
+          "n"
+          "x"
+          "o"
+        ];
+        key = "S";
+        action.__raw = ''
+
+          function()
+            require('flash').treesitter()
+          end
+        '';
+        options = {
+          desc = "Flash Treesitter";
+          silent = true;
+        };
+      }
+      {
+        mode = "o";
+        key = "r";
+        action.__raw = ''
+
+          function()
+            require('flash').remote()
+          end
+        '';
+        options = {
+          desc = "Remote Flash";
+          silent = true;
+        };
+      }
+      {
+        mode = [
+          "o"
+          "x"
+        ];
+        key = "R";
+        action.__raw = ''
+
+          function()
+            require('flash').treesitter_search()
+          end
+        '';
+        options = {
+          desc = "Treesitter Search";
+          silent = true;
+        };
+      }
+      {
+        mode = "c";
+        key = "<c-s>";
+        action.__raw = ''
+
+          function()
+            require('flash').toggle()
+          end
+        '';
+        options = {
+          desc = "Toggle Flash Search";
+          silent = true;
+        };
       }
     ];
 
