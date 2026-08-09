@@ -221,15 +221,35 @@ in
 
     };
 
-    # nixvimにはないがnixpkgsにあるプラグイン
     extraPlugins = [
+      # nixvimにはないがnixpkgsにあるプラグイン
       pkgs.vimPlugins.iceberg-vim
       pkgs.vimPlugins.fyler-nvim
       pkgs.vimPlugins.markview-nvim
       pkgs.vimPlugins.numb-nvim
       pkgs.vimPlugins.live-preview-nvim
       pkgs.vimPlugins.open-browser-vim
+      # GitHubから直接ビルドして読み込む
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "neocodeium";
+        src = pkgs.fetchFromGitHub {
+          owner = "monkoose"; # GitHubのユーザー名
+          repo = "neocodeium"; # リポジトリ名
+          rev = "v1.19.1"; # タグ名、またはコミットハッシュを指定
+          # 初回は lib.fakeHash などを指定してエラーを出し、
+          # コンソールに表示された正しいハッシュ値に書き換えてください。
+          hash = "sha256-rvlTa5nj9Aoelk7taqW5nBSqLZXrLt52jfWc+23toEs=";
+        };
+        # ↓ この行を追加して、ビルド時の require チェックをスキップします
+        doCheck = false;
+      })
     ];
+
+    extraConfigLua = ''
+      require('neocodeium').setup()
+      -- カラースキームを適用
+      vim.cmd("colorscheme iceberg")
+    '';
 
     keymaps = [
       # [romgrk/barbar.nvim: The neovim tabline plugin.](https://github.com/romgrk/barbar.nvim/)
@@ -257,7 +277,6 @@ in
         ];
         key = "s";
         action.__raw = ''
-
           function()
             require('flash').jump()
           end
@@ -275,7 +294,6 @@ in
         ];
         key = "S";
         action.__raw = ''
-
           function()
             require('flash').treesitter()
           end
@@ -289,7 +307,6 @@ in
         mode = "o";
         key = "r";
         action.__raw = ''
-
           function()
             require('flash').remote()
           end
@@ -306,7 +323,6 @@ in
         ];
         key = "R";
         action.__raw = ''
-
           function()
             require('flash').treesitter_search()
           end
@@ -320,7 +336,6 @@ in
         mode = "c";
         key = "<c-s>";
         action.__raw = ''
-
           function()
             require('flash').toggle()
           end
@@ -330,12 +345,16 @@ in
           silent = true;
         };
       }
+      {
+        mode = "i";
+        key = "<A-f>";
+        action.__raw = ''
+          function()
+            require('neocodeium').accept()
+          end 
+        '';
+      }
     ];
-
-    extraConfigLua = ''
-      -- カラースキームを適用
-      vim.cmd("colorscheme iceberg")
-    '';
 
   };
 
