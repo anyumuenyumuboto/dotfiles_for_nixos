@@ -360,6 +360,12 @@ in
 
   programs.starship.enable = true;
 
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true; # YaziがZshへの統合関数を生成します
+    shellWrapperName = "yaz"; # お好みで "yy" や "ya" などに変更可能
+  };
+
   # 環境変数を設定
   home.sessionVariables = {
     EDITOR = "nvim";
