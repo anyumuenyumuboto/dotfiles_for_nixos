@@ -101,6 +101,12 @@ in
 
     opts = {
       shell = "${pkgs.zsh}/bin/zsh";
+
+      # fold関連のオプション設定
+      foldcolumn = "1";
+      foldlevel = 99;
+      foldlevelstart = 99;
+      foldenable = true;
     };
 
     plugins = {
@@ -212,6 +218,9 @@ in
           folding.enable = true;
         };
       };
+
+      # nvim-ufo
+      nvim-ufo.enable = true;
 
       # undotree.nvim
       undotree.enable = true;
@@ -353,6 +362,17 @@ in
             require('neocodeium').accept()
           end 
         '';
+      }
+      # [kevinhwang91/nvim-ufo: Not UFO in the sky, but an ultra fold in Neovim.](https://github.com/kevinhwang91/nvim-ufo)
+      {
+        key = "zR";
+        action.__raw = "function() require('ufo').openAllFolds() end";
+        options.desc = "ufo: Open all";
+      }
+      {
+        key = "zM";
+        action.__raw = "function() require('ufo').closeAllFolds() end";
+        options.desc = "ufo: Close all";
       }
     ];
 
