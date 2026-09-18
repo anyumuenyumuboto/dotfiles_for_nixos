@@ -399,6 +399,7 @@ in
     aider-chat
     bat
     bottom
+    degit
     docker
     fzf
     gcc
